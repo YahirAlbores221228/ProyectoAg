@@ -1,0 +1,90 @@
+/* styles.css */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f4f4;
+}
+
+h1, h2 {
+    color: #333;
+}
+
+form {
+    background: #fff;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+label {
+    display: block;
+    margin-top: 10px;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    background: #007BFF;
+    color: #fff;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #0056b3;
+}
+
+#resultados {
+    white-space: pre-wrap;
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+#resultados {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+#resultados th, #resultados td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#resultados th {
+    background-color: #f2f2f2;
+    color: #333;
+    text-align: center;
+}
+
+#resultados td {
+    text-align: center;
+}
+
+#resultados tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+#resultados tr:hover {
+    background-color: #f1f1f1;
+}
+
+#resultados th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    background-color: #007BFF;
+    color: white;
+}

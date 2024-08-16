@@ -1,0 +1,71 @@
+5: Tenemos un codigo con validacion al hijo y mutacion, y si funciona respeta la parte de que siempre sea las preferencia y se hace para 3 cosas, 
+disponibilidad, preferencia, habilidad segun
+
+6:  Ya se esta checando lo de habilidad por tarea a lo miembros, ya que se deberia respetar y si hay dos iguales asignar 
+mas frecuente dicha tarea al mas alto y menos al mas bajo
+
+7: Revisar chatgpt sobre la ultima peticion, (habilidad)
+
+8: Aclarar porque en cruce, y mutacion se vuelve a verificar esto condiciones sabiendo que ya hay una optimizacion el fitneess
+
+
+
+
+
+
+Descartadaa
+3: considerar si se toma el tiempo de cada tarea o no es cuestion de checar
+4: verificar si esta lo correcto asignar tarea de otros compañeros
+5: verificar que si tambien toma en cuenta la habilidad de la tarea, al ser asginada ya que si dos prefieren esa tarea debe considerar quien es mas habil
+6: checar si es mejor agregar la tarea o se crea un dataset
+7: checar informacion en chatgpt o claude
+2: indentificar como hace la distribucion
+1: debo mejorar mis estrategia, estrutura y si la logica esta bien
+3: hay que verificar mutacion y cruce si se hace con validaciones o no, chat y claude
+4: parece ya quedar asi el algoritmo todavia se necesita considerar si se aplica validacion o no
+    ya esta quedan claro como lo hace, pero hay que estudiar las estrategias y checar eso de la validacion
+    si se hace o no ya que podria funcionar pero hay que pensar bien y estudiar mas cruce y mutacion, ver si se verifca solamente tareas
+
+
+metodo de cruce, con validaciones en el hijo:
+
+def cruce_verificado(padre1, padre2):
+    num_miembros = len(padre1.asignacion)
+    num_dias = len(padre1.asignacion[0])
+    num_franjas = len(padre1.asignacion[0][0])
+    hijo = Planificacion(num_miembros, [], num_dias, num_franjas)
+    # Cruce en un punto
+    punto_cruce = random.randint(0, num_miembros - 1)
+    for i in range(num_miembros):
+        if i < punto_cruce:
+            hijo.asignacion[i] = [dia[:] for dia in padre1.asignacion[i]]
+        else:
+            hijo.asignacion[i] = [dia[:] for dia in padre2.asignacion[i]]
+    # Verificación y ajuste de restricciones
+    for i, miembro_asignacion in enumerate(hijo.asignacion):
+        for dia in range(num_dias):
+            for franja in range(num_franjas):
+                tarea = hijo.asignacion[i][dia][franja]
+                if tarea:
+                    miembro = padre1.miembros[i]  # Asume que los miembros se mantienen en la clase Planificacion
+                    # Verificar disponibilidad
+                    if not miembro.disponibilidad[dia * 24 + franja]:
+                        hijo.asignacion[i][dia][franja] = None
+                        continue          
+                    # Verificar preferencias (opcional: asignar tarea preferida si es posible)
+                    if tarea.nombre not in miembro.preferencias:
+                        hijo.asignacion[i][dia][franja] = None        
+                    # Verificar habilidades
+                    habilidad = miembro.habilidades.get(tarea.nombre, 0.5)
+                    if habilidad < 0.5:  # Por ejemplo, si la habilidad es baja, reevalúa la asignación
+                        # Buscar otro miembro con mejor habilidad para esta tarea
+                        miembros_preferidos = [
+                            m for m in padre1.miembros
+                            if tarea.nombre in m.preferencias and m.habilidades.get(tarea.nombre, 0.5) >= 0.5
+                        ]
+                        if miembros_preferidos:
+                            nuevo_miembro = random.choice(miembros_preferidos)
+                            nuevo_idx = padre1.miembros.index(nuevo_miembro)
+                            hijo.asignacion[nuevo_idx][dia][franja] = tarea
+                            hijo.asignacion[i][dia][franja] = None
+    return hijo

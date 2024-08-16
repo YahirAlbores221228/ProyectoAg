@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algoritmo Genético de Tareas Domésticas</title>
+    <link rel="stylesheet" href="../static/index.css">
+</head>
+
+<body>
+    <h1>Planificador de Tareas Domésticas</h1>
+    <form id="input-form">
+        <h2>Agregar Miembro</h2>
+        <label for="nombre-miembro">Nombre:</label>
+        <input type="text" id="nombre-miembro" required>
+        <label for="preferencias-miembro">Preferencias (separadas por coma):</label>
+        <input type="text" id="preferencias-miembro" required>
+        <label for="habilidades-miembro">Habilidades (preferencia:promedio, separados por coma):</label>
+        <input type="text" id="habilidades-miembro" required>
+        <label for="disponibilidad-miembro">Disponibilidad (rango de horas por día, ej: 10:00-12:00):</label>
+        <input type="text" id="disponibilidad-lunes" placeholder="Lunes" required>
+        <input type="text" id="disponibilidad-martes" placeholder="Martes" required>
+        <input type="text" id="disponibilidad-miercoles" placeholder="Miércoles" required>
+        <input type="text" id="disponibilidad-jueves" placeholder="Jueves" required>
+        <input type="text" id="disponibilidad-viernes" placeholder="Viernes" required>
+        <input type="text" id="disponibilidad-sabado" placeholder="Sábado" required>
+        <input type="text" id="disponibilidad-domingo" placeholder="Domingo" required>
+        <button type="button" onclick="agregarMiembro()">Agregar Miembro</button>
+        
+        <h2>Agregar Tarea</h2>
+        <label for="nombre-tarea">Nombre:</label>
+        <input type="text" id="nombre-tarea" required>
+        <button type="button" onclick="agregarTarea()">Agregar Tarea</button>
+        
+        <button type="submit">Generar Planificación</button>
+    </form>
+
+    <h2>Resultados</h2>
+    <table id="resultados">
+        <thead>
+            <tr>
+                <th>Hora</th>
+                <th>Lunes</th>
+                <th>Martes</th>
+                <th>Miércoles</th>
+                <th>Jueves</th>
+                <th>Viernes</th>
+                <th>Sábado</th>
+                <th>Domingo</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+    <script src="../static/scritps.js"></script>
+</body>
+
+</html>
